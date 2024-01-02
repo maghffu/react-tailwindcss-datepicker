@@ -12,7 +12,7 @@ coverage
 
 # builds
 build
-dist
+
 .rpt2_cache
 .eslintcache
 tsconfig.tsbuildinfo
