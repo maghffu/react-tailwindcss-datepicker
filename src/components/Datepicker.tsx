@@ -41,7 +41,10 @@ const Datepicker: React.FC<DatepickerType> = ({
     inputName,
     startWeekOn = "sun",
     classNames = undefined,
-    popoverDirection = undefined
+    popoverDirection = undefined,
+    inline = false,
+    reverse = false,
+    hideForm = false
 }) => {
     // Ref
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -282,7 +285,10 @@ const Datepicker: React.FC<DatepickerType> = ({
             classNames,
             onChange,
             input: inputRef,
-            popoverDirection
+            popoverDirection,
+            inline,
+            reverse,
+            hideForm
         };
     }, [
         asSingle,
@@ -315,7 +321,10 @@ const Datepicker: React.FC<DatepickerType> = ({
         classNames,
         inputRef,
         popoverDirection,
-        firstGotoDate
+        firstGotoDate,
+        inline,
+        reverse,
+        hideForm
     ]);
 
     const containerClassNameOverload = useMemo(() => {
@@ -330,16 +339,22 @@ const Datepicker: React.FC<DatepickerType> = ({
     return (
         <DatepickerContext.Provider value={contextValues}>
             <div className={containerClassNameOverload} ref={containerRef}>
-                <Input setContextRef={setInputRef} />
+                {!hideForm && <Input setContextRef={setInputRef} />}
 
                 <div
-                    className="transition-all ease-out duration-300 absolute z-10 mt-[1px] text-sm lg:text-xs 2xl:text-sm translate-y-4 opacity-0 hidden"
+                    className={`transition-all ease-out duration-300  z-10 mt-[1px] text-sm lg:text-xs 2xl:text-sm translate-y-4 ${
+                        inline ? "" : "opacity-0 hidden absolute"
+                    }`}
                     ref={calendarContainerRef}
                 >
-                    <Arrow ref={arrowRef} />
+                    {!inline && <Arrow ref={arrowRef} />}
 
                     <div className="mt-2.5 shadow-sm border border-gray-300 px-1 py-0.5 bg-white dark:bg-slate-800 dark:text-white dark:border-slate-600 rounded-lg">
-                        <div className="flex flex-col lg:flex-row py-2">
+                        <div
+                            className={`flex flex-col ${
+                                reverse ? "lg:flex-row-reverse" : "lg:flex-row"
+                            } py-2`}
+                        >
                             {showShortcuts && <Shortcuts />}
 
                             <div
