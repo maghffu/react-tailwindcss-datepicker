@@ -187,7 +187,7 @@ export const RoundedButton: React.FC<Button> = ({
             : `${darkClass} ${activeClass} transition-all duration-300 hover:bg-gray-100 rounded-full p-[0.45rem] focus:ring-1`;
         const buttonFocusColor =
             BUTTON_COLOR.focus[primaryColor as keyof typeof BUTTON_COLOR.focus];
-        const disabledClass = disabled ? "line-through" : "";
+        const disabledClass = disabled ? "text-[#ddd] cursor-not-allowed" : "";
 
         return `${defaultClass} ${buttonFocusColor} ${disabledClass}`;
     }, [disabled, padding, primaryColor, roundedFull, active]);

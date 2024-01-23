@@ -212,10 +212,10 @@ const Days: React.FC<Props> = ({
                     !activeDateData(day).active
                         ? hoverClassByDay(day)
                         : activeDateData(day).className,
-                    isDateDisabled(day, type) && "line-through"
+                    isDateDisabled(day, type) && "text-[#ddd] cursor-not-allowed"
                 );
             }
-            return cn(baseClass, isDateDisabled(day, type) && "line-through", "text-gray-400");
+            return cn(baseClass, isDateDisabled(day, type) && "text-[#ddd] cursor-not-allowed", "text-gray-400");
         },
         [activeDateData, hoverClassByDay, isDateDisabled]
     );
